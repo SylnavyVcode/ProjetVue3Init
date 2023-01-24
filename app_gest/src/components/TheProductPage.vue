@@ -27,9 +27,6 @@
               class="table table-striped table-hover table-borderless align-middle"
             >
               <thead class="table-dark">
-                <caption>
-                  Table Name
-                </caption>
                 <tr class="bg-dark">
                   <th class="text-light">Id</th>
                   <th class="text-light">Libellé</th>
