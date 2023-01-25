@@ -20,7 +20,7 @@
       >
         <div class="modal-content p-2">
           <div class="modal-header">
-            <h5 v-if="state" class="modal-title" id="modalTitleId">Log In</h5>
+            <h5 v-if="state" class="modal-title"  id="modalTitleId">Log In</h5>
             <h5 v-else class="modal-title" id="modalTitleId">Sign Up</h5>
             <button
               type="button"
@@ -106,7 +106,7 @@
                 If you haven't a count please
                 <span
                   @click="clickToSignUp()"
-                  class="text-decoration-none text-primary pointer"
+                  class="text-decoration-none text-primary" style="cursor: pointer;"
                   >Sign Up</span
                 >.
               </p>
@@ -116,7 +116,7 @@
                 You have already a count please
                 <span
                   @click="clickToLogIn()"
-                  class="text-decoration-none text-primary pointer"
+                  class="text-decoration-none text-primary" style="cursor: pointer;"
                   >Log In</span
                 >.
               </p>

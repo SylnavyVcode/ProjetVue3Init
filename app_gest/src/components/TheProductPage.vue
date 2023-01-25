@@ -37,7 +37,9 @@
               </thead>
               <tbody class="table-group-divider">
                 
-                <tr v-show="item.libelle.toLocaleLowerCase().includes(search.toLocaleLowerCase())" v-for="(item, id) in products" :key="id">
+                <tr 
+                v-show="item.libelle.toLocaleLowerCase().includes(search.toLocaleLowerCase())" 
+                v-for="(item, id) in products" :key="id">
                   
                   <td >{{ item.id }}</td>
                   <td>{{item.libelle}}</td>
@@ -47,7 +49,9 @@
                     <span v-else class="text-dark">{{item.count}}</span>
                   </td>
                   <td>
-                    <button @click="addToCard(item)" class="btn" v-if="(item.status == true && item.count>0)">
+                    <button 
+                    @click="addToCard(item)" class="btn" 
+                    v-if="(item.status == true && item.count>0)">
                       <i class="text-success bi bi-plus-circle"></i>
                     </button>
                   </td>
