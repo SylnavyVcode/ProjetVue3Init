@@ -20,14 +20,15 @@
       >
         <div class="modal-content p-2">
           <div class="modal-header">
-            <h5 v-if="state" class="modal-title"  id="modalTitleId">Log In</h5>
+            <h5 v-if="state" class="modal-title" id="modalTitleId">Log In</h5>
             <h5 v-else class="modal-title" id="modalTitleId">Sign Up</h5>
-            <button
+            <button ref="btnClose"
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
+
           </div>
           <div class="modal-body">
             <div class="mb-3">
@@ -67,21 +68,21 @@
               >
             </div>
             <div v-if="!state" class="mb-3">
-              <label for="" class="form-label">Password</label>
+              <label for="" class="form-label"> Confirm password</label>
               <input
                 type="password"
                 class="form-control"
-                v-model="person.password"
+                v-model="person.confPassword"
                 name=""
                 id=""
                 aria-describedby="emailHelpId"
                 placeholder="**********"
               />
               <small
-                v-if="error.password"
+                v-if="error.confPassword"
                 id="emailHelpId"
                 class="form-text text-danger"
-                >Password Invalid</small
+                >Confirm password Invalid</small
               >
             </div>
             <div class="row mb-3">
@@ -106,7 +107,8 @@
                 If you haven't a count please
                 <span
                   @click="clickToSignUp()"
-                  class="text-decoration-none text-primary" style="cursor: pointer;"
+                  class="text-decoration-none text-primary"
+                  style="cursor: pointer"
                   >Sign Up</span
                 >.
               </p>
@@ -116,7 +118,8 @@
                 You have already a count please
                 <span
                   @click="clickToLogIn()"
-                  class="text-decoration-none text-primary" style="cursor: pointer;"
+                  class="text-decoration-none text-primary"
+                  style="cursor: pointer"
                   >Log In</span
                 >.
               </p>
@@ -144,27 +147,65 @@
           </div>
         </div>
       </div>
+
     </div>
 
     <!-- Optional: Place to the bottom of scripts -->
   </div>
 </template>
 <script>
+
+import db from '@/data/user.json'
+
 export default {
   data() {
     return {
+      db:db,
       person: {
         email: "",
         password: "",
+        confPassword: "",
       },
       error: {
         email: false,
         password: false,
+        confPassword: false
       },
       state: true,
     };
   },
   methods: {
+    signUp() {
+      if (this.person.email.trim() === "") {
+        this.error.email = true;
+        this.error.password = false;
+        this.error.confPassword = false;
+      } else {
+        if (this.person.password.trim() === "") {
+          this.error.password = true;
+          this.error.email = false;
+          this.error.confPassword = false;
+        } else {
+          if (this.person.confPassword.trim() === "") {
+            this.error.confPassword = true;
+            this.error.email = false;
+            this.error.password = false;
+      }else{
+          this.error.email = false;
+          this.error.password = false;
+          this.error.confPassword = false;
+          
+          if(this.person.confPassword != this.person.password){
+            this.error.confPassword = true
+  
+          }else{
+            this.error.confPassword = false
+          }
+
+      }  
+        }
+      }
+    },
     login() {
       if (this.person.email.trim() === "") {
         this.error.email = true;
@@ -176,6 +217,25 @@ export default {
         } else {
           this.error.email = false;
           this.error.password = false;
+
+          // Db
+
+         const response =  this.db.users.find(element => {
+            return element.email == this.person.email && element.password == this.person.password
+          });
+          if(response){
+            
+            this.db.account = []
+
+            this.db.account.push(response)
+
+            this.$refs.btnClose.click()
+
+            this.$emit('loginEmit')
+
+          }
+         
+         
         }
       }
     },

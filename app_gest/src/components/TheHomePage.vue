@@ -1,7 +1,7 @@
 <template>
   <main>
-   <TheNavbarPage :count="count"></TheNavbarPage>
-   <TheProductPage @addToCard="setCount()"></TheProductPage>
+   <TheNavbarPage @loginIn="loginUp()" :count="count"></TheNavbarPage>
+   <TheProductPage @addToCard="setCount()" :status="state"></TheProductPage>
   </main>
 </template>
 
@@ -19,11 +19,15 @@ export default {
   data() {
     return {
       count:0,
+      state:false
     }
   },
   methods: {
     setCount(){
       this.count++
+    },
+    loginUp(){
+      this.state=true
     }
   },
 };

@@ -1,0 +1,9 @@
+{
+  "users":[
+    {"email": "test@gmail.com", "password":"aa", "admin":true},
+    {"email": "test1@gmail.com", "password":"aa", "admin":false}
+  ],
+  "account":[{"email": "", "password":"", "admin":false}],
+
+  "card":[]
+}
