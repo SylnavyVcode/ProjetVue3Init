@@ -219,6 +219,7 @@ export default {
           this.error.password = false;
 
           // Db
+          console.log("mange");
 
          const response =  this.db.users.find(element => {
             return element.email == this.person.email && element.password == this.person.password
